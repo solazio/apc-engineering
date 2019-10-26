@@ -24,16 +24,6 @@
         </v-sheet>
       </v-carousel-item>
     </v-carousel>
-        <!-- <v-row justify="space-around">
-      <v-col cols="12" md="8">
-        <v-card class="mb-3">
-          <v-card-title class="title font-weight-regular text-uppercase text-sm-center secondary white--text mb-3">Structural engineering services we offer</v-card-title>
-          <v-card-text class="body-1">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error itaque aperiam harum omnis repellat quis odit natus similique possimus corporis quod amet in minima impedit, ab aliquid magni delectus labore!
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row> -->
   </v-container>
 </template>
 
@@ -57,11 +47,11 @@ export default {
         },
         {
           src: require('../static/img/kings-college-4.jpg'),
-          text: 'Our work',
+          text: 'Temporary works',
         },
         {
           src: require('../static/img/bridge-house-5.jpg'),
-          text: 'Our work',
+          text: 'Steel frame',
         },
       ],
     }

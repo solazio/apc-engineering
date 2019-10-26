@@ -18,7 +18,6 @@
       <div class="hidden-sm-and-down">
         <v-btn text class="my-menu-button" to="/">Home</v-btn>
         <v-btn text class="my-menu-button" to="/projects">Projects</v-btn>
-        <v-btn text class="my-menu-button" to="/services">Services</v-btn>
         <v-btn text class="my-menu-button" to="/about">About us</v-btn>
         <v-btn text class="my-menu-button" to="/contact">Contact</v-btn>
       </div>
@@ -70,10 +69,6 @@ export default {
         {
           title: 'Projects',
           to: '/projects'
-        },
-        {
-          title: 'Services',
-          to: '/services'
         },
         {
           title: 'About us',
