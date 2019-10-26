@@ -1,0 +1,27 @@
+{
+  "name": "apc-engineering",
+  "version": "1.0.0",
+  "description": "Engineering consultancy website using nuxt",
+  "author": "solazio",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "nuxt": "^2.0.0",
+    "nuxt-fontawesome": "^0.4.0",
+    "vuelidate": "^0.7.4"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "@nuxtjs/vuetify": "^1.0.0",
+    "css-loader": "^3.2.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4"
+  }
+}
