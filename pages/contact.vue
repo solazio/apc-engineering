@@ -77,7 +77,7 @@ import { validationMixin } from 'vuelidate'
 import Axios from 'axios'
 import { required, maxLength, email, alphaNum } from 'vuelidate/lib/validators'
 
-const API_URL = ' https://apc-engineering-server.herokuapp.com/'
+const API_URL = 'https://apc-engineering-server.herokuapp.com'
 
 export default {
   mixins: [validationMixin],
