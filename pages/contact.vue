@@ -59,7 +59,13 @@
         <v-row class="pl-7 pr-7">
           <v-btn @click="clear" depressed color="secondary" outlined>clear</v-btn>
           <div class="flex-grow-1"></div>
-          <v-btn @click="submit" depressed color="secondary" outlined>send</v-btn>
+          <v-btn
+            @click="submit"
+            depressed
+            color="secondary"
+            outlined
+            :disabled="disabledButton"
+          >send</v-btn>
         </v-row>
       </v-col>
     </v-row>
@@ -68,7 +74,10 @@
 
 <script>
 import { validationMixin } from 'vuelidate'
+import Axios from 'axios'
 import { required, maxLength, email, alphaNum } from 'vuelidate/lib/validators'
+
+const API_URL = ' https://apc-engineering-server.herokuapp.com/'
 
 export default {
   mixins: [validationMixin],
@@ -84,7 +93,8 @@ export default {
     name: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
+    disabledButton: false
   }),
 
   computed: {
@@ -123,7 +133,66 @@ export default {
   methods: {
     submit() {
       this.$v.$touch()
-      // Add here the submit function... post data to /contact
+      if (!this.$v.$invalid) {
+        this.disabledButton = true
+        const self = this
+        const dataToSend = {
+          name: this.name,
+          email: this.email,
+          phone: this.phone,
+          message: this.message
+        }
+        Axios.post(`${API_URL}/contact`, dataToSend)
+        // Axios.post(`http://localhost:5000/contact`, dataToSend)
+        .then(function(response) {
+          self.$toast.success(response.data.message, {
+            theme: 'bubble',
+            duration: 4000,
+            containerClass: 'toast-custom',
+            icon: {
+              name: 'check_circle',
+              after: false
+            }
+          })
+          self.disabledButton = false
+          self.$v.$reset()
+          self.name = ''
+          self.email = ''
+          self.phone = ''
+          self.message = ''
+        })
+        .catch(function(error) {
+          let errorMessage = 'There was an error. Please try again!'
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+            errorMessage = error.response.status + ' ' + error.response.data;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+            errorMessage = '500 Connection refused. Probably the server is down.'
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', error.message);
+            errorMessage = error.message;
+          }
+          self.$toast.error(errorMessage, {
+            theme: 'bubble',
+            duration: 4000,
+            containerClass: 'toast-custom',
+            icon: {
+              name: 'error',
+              after: false
+            }
+          })
+          self.disabledButton = false
+        })
+      }
     },
     clear() {
       this.$v.$reset()
@@ -136,9 +205,18 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .my-phone {
   letter-spacing: 1px;
   color: #19bd9d;
+}
+.toast-custom {
+  opacity: 0.95;
+  font-family: 'Raleway', sans-serif;
+}
+@media only screen and (max-width: 720px) {
+  .toast-custom {
+    padding-top: 3rem;
+  }
 }
 </style>
