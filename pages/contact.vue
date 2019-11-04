@@ -142,7 +142,10 @@ export default {
           phone: this.phone,
           message: this.message
         }
-        Axios.post(`${API_URL}/contact`, dataToSend)
+        if (dataToSend.phone === "") {
+          dataToSend.phone = "Not provided"
+        }
+        Axios.post(`${API_URL}/send-email`, dataToSend)
         // Axios.post(`http://localhost:5000/contact`, dataToSend)
         .then(function(response) {
           self.$toast.success(response.data.message, {
